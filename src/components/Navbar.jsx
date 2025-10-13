@@ -5,7 +5,7 @@ export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
   const location = useLocation();
 
-  // لتفعيل الداكن مود على الصفحة
+  // تفعيل الدارك مود على مستوى الصفحة
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -18,38 +18,38 @@ export default function Navbar() {
     }
   }, [darkMode]);
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
+  const toggleDarkMode = () => setDarkMode(!darkMode);
 
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Services", path: "/services" },
-    { name: "MyCar", path: "/mycar" },
-    { name: "Booking", path: "/booking" },
-    { name: "Dashboard", path: "/admindashboard" },
-    { name: "Contacted", path: "/contacted" },
+    { name: "الرئيسية", path: "/" },
+    { name: "الخدمات", path: "/services" },
+    { name: "سيارتي", path: "/mycar" },
+    { name: "الحجوزات", path: "/booking" },
+    { name: "لوحة التحكم", path: "/admindashboard" },
+    { name: "تواصل معنا", path: "/contacted" },
   ];
 
   return (
-    <nav className="flex justify-between items-center px-20 md:px-40 py-4 bg-white/30 dark:bg-gray-900/80 backdrop-blur-sm fixed top-0 left-0 w-full z-50 transition-colors duration-500">
-      {/* شعار الموقع */}
-      <h1 className="text-2xl font-bold text-black dark:text-white transition-colors duration-500">
-        CarNect
-      </h1>
+    <nav className="flex justify-between items-center px-10 md:px-20 py-4 bg-gray-400 dark:bg-gray-800 fixed top-0 left-0 w-full z-50 transition-colors duration-500">
+      {/* شعار Carnect */}
+      <div className="flex-shrink-0 text-2xl font-extrabold">
+        <span className="text-sky-400">C</span>
+        <span className="text-blue-900">arnect</span>
+      </div>
 
       {/* روابط الصفحات */}
-      <ul className="flex gap-8 font-semibold text-lg">
+      <ul className="flex justify-center items-center flex-1 max-w-4xl mx-auto">
         {navItems.map((item) => (
-          <li key={item.path}>
+          <li key={item.path} className="flex-1 text-center">
             <Link
               to={item.path}
-              className="relative text-black dark:text-white transition-all duration-300 transform hover:text-white hover:-translate-y-1"
+              className={`relative text-lg font-semibold block transition-all duration-300 ease-in-out hover:scale-110 hover:-translate-y-1 ${
+                location.pathname === item.path
+                  ? "text-black dark:text-white"
+                  : "text-white hover:text-black dark:text-gray-300 dark:hover:text-black"
+              }`}
             >
               {item.name}
-              {location.pathname === item.path && (
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#800000] rounded-full"></span>
-              )}
             </Link>
           </li>
         ))}
@@ -58,7 +58,7 @@ export default function Navbar() {
       {/* زر الداكن مود */}
       <div
         onClick={toggleDarkMode}
-        className={`w-12 h-6 flex items-center rounded-full cursor-pointer transition-colors duration-300 ${
+        className={`ml-6 w-12 h-6 flex items-center rounded-full cursor-pointer transition-colors duration-300 ${
           darkMode ? "bg-gray-700" : "bg-gray-300"
         }`}
       >
