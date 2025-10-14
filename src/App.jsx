@@ -5,7 +5,7 @@ import Services from "./pages/Services";
 import Booking from "./pages/Booking";
 import MyCar from "./pages/MyCar";
 import Contact from "./pages/Contact";
-import ServiceDetails from "./pages/ServiceDetails";
+
 import AdminDashboard from "./pages/AdminDashboard";
 import MainLayout from "./layouts/MainLayout";
 
