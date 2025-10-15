@@ -5,7 +5,10 @@ export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
   const location = useLocation();
 
-  // تفعيل الدارك مود على مستوى الصفحة
+  // جلب بيانات الحساب من localStorage
+  const account = JSON.parse(localStorage.getItem("accountData"));
+
+  // تفعيل الداكن مود
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -20,14 +23,22 @@ export default function Navbar() {
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
-  const navItems = [
-    { name: "الرئيسية", path: "/" },
-    { name: "الخدمات", path: "/services" },
-    { name: "سيارتي", path: "/mycar" },
-    { name: "الحجوزات", path: "/booking" },
-    { name: "لوحة التحكم", path: "/admindashboard" },
-    { name: "تواصل معنا", path: "/contacted" },
-  ];
+  // بناء قائمة الروابط حسب الدور
+  let navItems = [];
+
+  if (account && account.role === "provider") {
+    // إذا مقدم خدمة: يظهر فقط لوحة التحكم
+    navItems = [{ name: "لوحة التحكم", path: "/admindashboard" }];
+  } else {
+    // إذا عميل أو غير مسجل: الروابط العادية
+    navItems = [
+      { name: "الرئيسية", path: "/Home" },
+      { name: "الخدمات", path: "/services" },
+      { name: "سيارتي", path: "/mycar" },
+      { name: "الحجوزات", path: "/booking" },
+      { name: "تواصل معنا", path: "/contacted" },
+    ];
+  }
 
   return (
     <nav className="flex justify-between items-center px-10 md:px-20 py-4 bg-gray-400 dark:bg-gray-800 fixed top-0 left-0 w-full z-50 transition-colors duration-500">

@@ -1,8 +1,22 @@
+
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function AdminDashboard() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const account = JSON.parse(localStorage.getItem("accountData"));
+    if (!account || account.role !== "provider") {
+      // إذا المستخدم غير مقدم خدمة (provider) نرجعه للصفحة الرئيسية
+      navigate("/home");
+    }
+  }, [navigate]);
+
   return (
-    <div className="p-10">
-      <h2 className="text-3xl font-semibold mb-4">لوحة تحكم الإدارة</h2>
-      <p>هنا ستُعرض التقارير، الطلبات، والإحصائيات الخاصة بالنظام.</p>
+    <div>
+      <h1>لوحة تحكم مقدم الخدمة</h1>
+      {/* باقي محتوى لوحة التحكم */}
     </div>
   );
 }
