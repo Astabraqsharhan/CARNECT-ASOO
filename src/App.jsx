@@ -1,6 +1,3 @@
-// src/App.jsx
-
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -8,37 +5,49 @@ import Services from "./pages/Services";
 import Booking from "./pages/Booking";
 import MyCar from "./pages/MyCar";
 import Contact from "./pages/Contact";
-import AdminDashboard from "./pages/AdminDashboard";
+
 import MainLayout from "./layouts/MainLayout";
+import AdminDashboardLayout from "./layouts/AdminDashboardLayout";
+import AdminDashboard from "./pages/AdminDashboard";
+import Orders from "./pages/Orders";
+import AdminServices from "./pages/AdminServices";
+import Stats from "./pages/Stats";
+import Offers from "./pages/Offers";
+import Reviews from "./pages/Reviews";
+import Users from "./pages/Users";
+import Settings from "./pages/Settings";
+import History from "./pages/History";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false); // وضع الداكن
-
   return (
-    <div className={darkMode ? "dark" : ""}>
-      <Router>
-        <Routes>
-          {/* 👇 صفحة تسجيل الدخول بدون Navbar و Footer */}
-          <Route path="/" element={<Login />} />
+    <Router>
+      <Routes>
+        {/* صفحة تسجيل الدخول */}
+        <Route path="/" element={<Login />} />
 
-          {/* 👇 الصفحات العامة بعد تسجيل الدخول (تحت MainLayout) */}
-          <Route
-            element={<MainLayout darkMode={darkMode} setDarkMode={setDarkMode} />}
-          >
-            <Route path="/home" element={<Home />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/booking" element={<Booking />} />
-            <Route path="/mycar" element={<MyCar />} />
-            <Route path="/contacted" element={<Contact />} />
-            {/* 👇 لوحة التحكم لمقدم الخدمة */}
-            <Route path="/admindashboard" element={<AdminDashboard />} />
-          </Route>
+        {/* الصفحات العامة */}
+        <Route element={<MainLayout />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/booking" element={<Booking />} />
+          <Route path="/mycar" element={<MyCar />} />
+          <Route path="/Contacted" element={<Contact />} />
+        </Route>
 
-          {/* لو عندك صفحة خاصة بالأدمن خارج التصميم العام */}
-          {/* <Route path="/admin" element={<AdminLogin />} /> */}
-        </Routes>
-      </Router>
-    </div>
+        {/* لوحة تحكم الأدمن */}
+        <Route element={<AdminDashboardLayout />}>
+          <Route path="/admindashboard" element={<AdminDashboard />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/adminservices" element={<AdminServices />} />
+          <Route path="/stats" element={<Stats />} />
+          <Route path="/offers" element={<Offers />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/history" element={<History />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
