@@ -10,7 +10,7 @@ import MainLayout from "./layouts/MainLayout";
 import AdminDashboardLayout from "./layouts/AdminDashboardLayout";
 import AdminDashboard from "./pages/AdminDashboard";
 import Orders from "./pages/Orders";
-import AdminServices from "./pages/AdminServices";
+import AdminServices from "./pages/adminServices";
 import Stats from "./pages/Stats";
 import Offers from "./pages/Offers";
 import Reviews from "./pages/Reviews";
